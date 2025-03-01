@@ -1,0 +1,73 @@
+package Parcial;
+
+class Auto {
+    private double nivelDeCombustible;
+    String modelo;
+    String color;
+    
+    public Auto(String modelo, String color, double nivelDeCombustible) {
+        this.modelo = modelo;
+        this.color = color;
+        this.nivelDeCombustible = nivelDeCombustible;
+    }
+    
+    
+    public void encender(String tipoDeCombustible) {
+        System.out.println("El auto " + modelo + " ha encendido con " + tipoDeCombustible);
+    }
+    
+    public void encender(int claveElectronica) {
+        System.out.println("El auto " + modelo + " ha encendido con la clave electrónica número " + claveElectronica);
+    }
+    
+    public double obtenerNivelDeCombustible() {
+        return nivelDeCombustible;
+    }
+    
+    public void recargarCombustible(double cantidad) {
+        if (cantidad > 0) {
+            nivelDeCombustible += cantidad;
+            System.out.println("Se ha recargado " + cantidad + " litros de combustible.");
+        } else {
+            System.out.println("Cantidad no válida para recargar.");
+        }
+    }
+    
+    public void arrancar() {
+        System.out.println("El auto " + modelo + " ha arrancado.");
+    }
+}
+
+class AutoDeportivo extends Auto {
+    int velocidadMaxima;
+    public AutoDeportivo(String modelo, String color, double nivelDeCombustible, int velocidadMaxima) {
+        super(modelo, color, nivelDeCombustible);
+        this.velocidadMaxima = velocidadMaxima;
+    }
+    
+    @Override
+    public void arrancar() {
+        super.arrancar();
+        System.out.println("¡El auto deportivo " + modelo + " tiene una velocidad máxima de " + velocidadMaxima + " km/h!");
+    }
+    
+}
+public class Main {
+    public static void main(String[] args) {
+    	
+        Auto miAuto = new Auto("Toyota", "Azul", 30);
+        System.out.println("Nivel de combustible inicial: " + miAuto.obtenerNivelDeCombustible() + " litros");
+        
+        miAuto.encender("gasolina");
+        miAuto.encender(12345);
+        
+        miAuto.recargarCombustible(20);
+        System.out.println("Nivel de combustible después de recargar: " + miAuto.obtenerNivelDeCombustible() + " litros");
+        
+        AutoDeportivo miAutoDeportivo = new AutoDeportivo("Ferrari", "Rojo", 50, 350);
+        miAutoDeportivo.arrancar();
+        
+        Auto miNuevoAuto = new AutoDeportivo("Lamborghini", "Amarillo", 60, 400);
+        miNuevoAuto.arrancar();
+    }
+}
